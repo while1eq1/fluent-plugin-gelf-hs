@@ -8,7 +8,7 @@ class GELFOutput < BufferedOutput
   config_param :add_msec_time, :bool, :default => false
   config_param :host, :string, :default => nil
   config_param :port, :integer, :default => 12201
-  config_param :protocol, :string, :default => 'udp'
+  config_param :protocol, :string, :default => 'tcp'
 
   def initialize
     super
@@ -25,7 +25,7 @@ class GELFOutput < BufferedOutput
     # (@protocol is used instead of conf['protocol'] to leverage config_param default)
     if @protocol == 'udp' then @proto = GELF::Protocol::UDP
     elsif @protocol == 'tcp' then @proto = GELF::Protocol::TCP
-    else raise ConfigError, "'protocol' parameter should be either 'udp' (default) or 'tcp'"
+    else raise ConfigError, "'protocol' parameter should be either 'udp' or 'tcp' (default)"
     end
   end
 
