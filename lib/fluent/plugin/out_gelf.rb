@@ -4,7 +4,7 @@ class GELFOutput < BufferedOutput
 
   Plugin.register_output("gelf", self)
 
-  require_relative 'gelf_util'
+  require 'fluent/gelf_util'
   include GelfUtil
 
   config_param :use_record_host, :bool, :default => false
