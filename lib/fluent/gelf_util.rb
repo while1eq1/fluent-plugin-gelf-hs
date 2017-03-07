@@ -50,20 +50,21 @@ module Fluent
       end
 
       if gelfentry['short_message'].nil? or gelfentry['short_message'].empty? then
-        if not (record['message'].nil? or record['message'].empty?) then
-          gelfentry['short_message'] = record['message']
+        if not (gelfentry['_message'].nil? or gelfentry['_message'].empty?) then
+          gelfentry['short_message'] = gelfentry.delete('_message')
         else
-          gelfentry['short_message'] = "WTF"
+          gelfentry['short_message'] = record.to_json
         end
       end
 
-      return gelfentry
+      # I realize the nulls are will be treated as unset keys, but it does
+      # tend to make for larger files and data transmissions.
+      return gelfentry.delete_if{ |k,v| v.nil? }
 
     end
 
     def make_json(gelfentry,conf)
       gelfentry['version'] = '1.0'
-      gelfentry['protocol'] = 1
 
       gelfentry.to_json + ( conf.is_a?(Hash) and conf.key?(:record_separator) ? conf[:record_separator] : "\0" )
     end
