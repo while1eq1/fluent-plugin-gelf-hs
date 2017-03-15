@@ -9,8 +9,8 @@ module Fluent
       config_param :add_msec_time, :bool, :default => false
 
       def configure(conf)
-        super
-        require "gelf"
+        super(conf)
+        require 'gelf'
       end
 
       def format(tag, time, record)
