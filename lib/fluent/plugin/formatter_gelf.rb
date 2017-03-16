@@ -6,7 +6,6 @@ module Fluent
 
       Plugin.register_formatter("gelf", self)
 
-      require 'gelf'
       require 'fluent/gelf_util'
       include GelfUtil
 
