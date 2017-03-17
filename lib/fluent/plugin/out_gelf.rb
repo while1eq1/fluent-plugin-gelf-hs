@@ -83,11 +83,6 @@ module Fluent
     def formatted_to_msgpack_binary
       true
     end
-
-    def formatted_to_msgpack_binary
-      true
-    end
-
   end
 
 end
