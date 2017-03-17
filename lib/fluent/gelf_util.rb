@@ -1,6 +1,8 @@
 module Fluent
   module GelfUtil
 
+    require 'gelf'
+
     def make_gelfentry(tag,time,record, conf = {})
       gelfentry = { '_tag' => tag }
       if defined? Fluent::EventTime and time.is_a? Fluent::EventTime then
