@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "fluent-plugin-gelf-hs"
-  s.version     = "1.0.0"
+  s.version     = "1.0.1"
   s.authors     = ["Alex Yamauchi", "Eric Searcy"]
   s.email       = ["oss@hotschedules.com"]
   s.homepage    = "https://github.com/bodhi-space/fluent-plugin-gelf-hs"
