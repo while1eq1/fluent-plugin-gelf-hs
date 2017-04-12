@@ -13,6 +13,8 @@ module Fluent
     config_param :host, :string, :default => nil
     config_param :port, :integer, :default => 12201
     config_param :protocol, :string, :default => 'udp'
+    config_param :tls, :bool, :default => false
+    config_param :tls_options, :hash, :default => {}
 
     def initialize
       super
@@ -35,7 +37,15 @@ module Fluent
     def start
       super
 
-      @conn = GELF::Notifier.new(@host, @port, 'WAN', {:facility => 'fluentd', :protocol => @proto})
+      options = {:facility => 'fluentd', :protocol => @proto}
+
+      # add tls key (tls_options) only when tls = True
+      # see https://github.com/graylog-labs/gelf-rb/blob/72916932b789f7a6768c3cdd6ab69a3c942dbcef/lib/gelf/notifier.rb#L133-L140
+      if @tls then
+        options[:tls] = @tls_options
+      end
+
+      @conn = GELF::Notifier.new(@host, @port, 'WAN', options)
 
       # Errors are not coming from Ruby so we use direct mapping
       @conn.level_mapping = 'direct'
