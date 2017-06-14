@@ -14,7 +14,6 @@ module Fluent
 
       def configure(conf)
         super(conf)
-        require 'gelf'
       end
 
       def format(tag, time, record)
