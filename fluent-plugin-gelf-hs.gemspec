@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "fluent-plugin-gelf-hs"
-  s.version     = "1.0.2"
+  s.version   = ENV.key?('RUBYGEM_VERSION') ? ENV['RUBYGEM_VERSION'] : '1.0.3'
   s.authors     = ["Alex Yamauchi", "Eric Searcy"]
   s.email       = ["oss@hotschedules.com"]
   s.homepage    = "https://github.com/bodhi-space/fluent-plugin-gelf-hs"
@@ -21,13 +21,6 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "fluentd"
   s.add_runtime_dependency "gelf", ">= 2.0.0"
 
-  ## Disabling since this appears to have a gem version dependencey.
-  ## This type of metadata is not supported by gem, but can be incorporated
-  ## by other packaging systems (ie. rpm).
-  #s.metadata = {
-  #  'provides' => 'fluent-plugin-gelf = 0.1.0',
-  #  'conflicts' => 'fluent-plugin-gelf'
-  #}
-  s.signing_key = File.expand_path('~/certs/oss@hotschedules.com.key') if $0 =~ /gem\z/
+  s.signing_key = File.expand_path( ENV.key?('RUBYGEM_SIGNING_KEY') ? ENV['RUBYGEM_SIGNING_KEY'] : '~/certs/oss@hotschedules.com.key' ) if $0 =~ /\bgem[\.0-9]*\z/
   s.cert_chain    = %w[certs/oss@hotschedules.com.cert]
 end
