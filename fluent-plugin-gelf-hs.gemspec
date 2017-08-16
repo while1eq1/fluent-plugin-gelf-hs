@@ -22,6 +22,5 @@ Gem::Specification.new do |s|
   s.add_runtime_dependency "gelf", ">= 2.0.0"
   s.add_runtime_dependency "yajl-ruby", "~> 1.0"
 
-  s.signing_key = File.expand_path( ENV.key?('RUBYGEM_SIGNING_KEY') ? ENV['RUBYGEM_SIGNING_KEY'] : '~/certs/oss@hotschedules.com.key' ) if $0 =~ /\bgem[\.0-9]*\z/
-  s.cert_chain    = %w[certs/oss@hotschedules.com.cert]
+
 end
