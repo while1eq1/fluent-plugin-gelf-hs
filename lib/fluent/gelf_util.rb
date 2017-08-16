@@ -3,6 +3,7 @@ module Fluent
   module GelfUtil
 
     require 'gelf'
+    require 'yajl'
 
     def make_gelfentry(tag,time,record, conf = {})
       gelfentry = { '_tag' => tag }
@@ -88,13 +89,13 @@ module Fluent
     def make_json(gelfentry,conf)
       gelfentry['version'] = '1.0'
 
-      gelfentry.each_pair  do |k,v|
-        if v.is_a?(String)
-          gelfentry[k] = v.force_encoding('UTF-8')
-        end
-      end
+     # gelfentry.each_pair  do |k,v|
+     #   if v.is_a?(String)
+      #    gelfentry[k] = v.force_encoding('UTF-8')
+      #  end
+     # end
 
-      gelfentry.to_json + ( conf.is_a?(Hash) and conf.key?(:record_separator) ? conf[:record_separator] : "\0" )
+      Yajl.load(gelfentry) #+ ( conf.is_a?(Hash) and conf.key?(:record_separator) ? conf[:record_separator] : "\0" )
     end
   end
 end
