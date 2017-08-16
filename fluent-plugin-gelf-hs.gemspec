@@ -3,7 +3,7 @@ $:.push File.expand_path("../lib", __FILE__)
 
 Gem::Specification.new do |s|
   s.name        = "fluent-plugin-gelf-hs"
-  s.version   = ENV.key?('RUBYGEM_VERSION') ? ENV['RUBYGEM_VERSION'] : '1.0.3'
+  s.version   = ENV.key?('RUBYGEM_VERSION') ? ENV['RUBYGEM_VERSION'] : '1.0.5'
   s.authors     = ["Alex Yamauchi", "Eric Searcy"]
   s.email       = ["oss@hotschedules.com"]
   s.homepage    = "https://github.com/bodhi-space/fluent-plugin-gelf-hs"
